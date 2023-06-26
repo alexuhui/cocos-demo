@@ -23,6 +23,9 @@ export class GameManager extends Component {
     private _road: BlockType[] = [];
 
     @property({ type: Node })
+    public boxRoot: Node | null = null;
+
+    @property({ type: Node })
     public startMenu: Node | null = null;
     @property({ type: PlayerController })
     public playerCtrl: PlayerController | null = null;
@@ -75,7 +78,7 @@ export class GameManager extends Component {
 
     generateRoad() {
 
-        this.node.removeAllChildren();
+        this.boxRoot.removeAllChildren();
 
         this._road = [];
         // startPos
@@ -92,7 +95,7 @@ export class GameManager extends Component {
         for (let j = 0; j < this._road.length; j++) {
             let block: Node | null = this.spawnBlockByType(this._road[j]);
             if (block) {
-                this.node.addChild(block);
+                this.boxRoot.addChild(block);
                 block.setPosition(j * BLOCK_SIZE, 0, 0);
             }
         }
